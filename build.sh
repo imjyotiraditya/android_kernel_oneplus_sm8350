@@ -5,6 +5,10 @@
 
 SECONDS=0 # builtin bash timer
 ZIPNAME="QuicksilveR-martini-$(date '+%Y%m%d-%H%M').zip"
+if test -z "$(git rev-parse --show-cdup 2>/dev/null)" &&
+   head=$(git rev-parse --verify HEAD 2>/dev/null); then
+        ZIPNAME="${ZIPNAME::-4}-$(echo $head | cut -c1-8).zip"
+fi
 TC_DIR="$HOME/tc/clang-r416183b1"
 GCC_64_DIR="$HOME/tc/aarch64-linux-android-4.9"
 GCC_32_DIR="$HOME/tc/arm-linux-androideabi-4.9"
